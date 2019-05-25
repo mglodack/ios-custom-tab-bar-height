@@ -1,3 +1,10 @@
-## What's this?
+# ios-custom-tab-bar-height
 
-The goal of this small sample application is to create a playground for customizing UITbarBarController tabBar height.
+## Goals
+
+* Identify a solution that will customize the UITabBarController.tabBar height that supports all devices.
+* Identify a solution that will customize the vertical position of the UITabBarItem.
+
+## UITabBarItem learnings
+
+* The UITabBarItem does not extend from UIView so there is no frame to adjust. Instead, the APIs that are provided allow you to adjust the UITabBarItem title position Offsets and the imageInsets.
