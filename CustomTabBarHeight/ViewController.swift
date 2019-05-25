@@ -13,6 +13,13 @@ class ViewController: UIViewController {
     fileprivate let _backgroundColor: UIColor
     fileprivate let _tabBarTitle: String
     
+    /*
+     It returns a UIViewController instance with a specified backgroundColor, and tabBarTitle.
+     
+     NOTE:
+     - The self.view.backgroundColor is set during viewDidLoad.
+     - The tabBarTitle is used to create the UITabBarItem after initialization.
+    */
     public init(backgroundColor: UIColor, tabBarTitle: String) {
         
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 14)!], for: .normal)
