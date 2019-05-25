@@ -17,6 +17,8 @@ class MyTabBarViewController: UITabBarController {
             ViewController(backgroundColor: .blue, tabBarTitle: "blue"),
             ViewController(backgroundColor: .yellow, tabBarTitle: "yellow")
         ]
+        
+        self.tabBar.isTranslucent = false
     }
     
     /*
