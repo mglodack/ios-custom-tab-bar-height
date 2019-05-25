@@ -15,8 +15,8 @@ class ViewController: UIViewController {
     
     public init(backgroundColor: UIColor, tabBarTitle: String) {
         
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 20)!], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 20)!], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 14)!], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 14)!], for: .selected)
         
         self._backgroundColor = backgroundColor
         self._tabBarTitle = tabBarTitle
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         
         self.tabBarItem = UITabBarItem(
             title: _tabBarTitle,
-            image: UIImage(named: "tab_bar_icon")?.withRenderingMode(.alwaysOriginal),
+            image: UIImage(named: "tab_bar_icon"),
             selectedImage: nil)
     }
     

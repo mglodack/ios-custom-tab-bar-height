@@ -24,7 +24,7 @@ class MyTabBarViewController: UITabBarController {
     /*
      This tabBarHeight is used to customize the height of the tabBar.
     */
-    let tabBarHeight: CGFloat = 180.0;
+    let tabBarHeight: CGFloat = 71.0;
     
     /*
      This allows us to use the custom tabBarHeight and adjust the tabBar height.
