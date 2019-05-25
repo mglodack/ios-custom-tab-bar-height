@@ -20,23 +20,34 @@ class MyTabBarViewController: UITabBarController {
         
         self.tabBar.isTranslucent = false
     }
-    
-    /*
-     This tabBarHeight is used to customize the height of the tabBar.
-    */
-    let tabBarHeight: CGFloat = 71.0;
-    
-    /*
-     This allows us to use the custom tabBarHeight and adjust the tabBar height.
-     In doing so, we have to adjust the height and y position to account for the change in height.
-    */
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        var tabFrame = self.tabBar.frame
-        tabFrame.size.height = tabBarHeight
-        tabFrame.origin.y = self.view.frame.size.height - tabBarHeight;
+}
 
-        self.tabBar.frame = tabFrame;
+/*
+ Original source: https://stackoverflow.com/a/50346008/2994271
+ 
+ This extension on UITabBar will adjust the height for all UITabBar instances.
+ It is responsible for create a size that automatically calculates dimensions, so the
+ viewControllers of the UITabBarController don't have to be manually adjusted when
+ the height of the tabBar changes.
+*/
+extension UITabBar {
+    static let tabBarHeight: CGFloat = 71.0
+  
+    /*
+     Asks the view to calculate and return the size that best fits the specified size.
+     
+     Docs: https://developer.apple.com/documentation/uikit/uiview/1622625-sizethatfits
+    */
+    override open func sizeThatFits(_ size: CGSize) -> CGSize {
+        guard let window = UIApplication.shared.keyWindow else {
+            return super.sizeThatFits(size)
+        }
+        var sizeThatFits = super.sizeThatFits(size)
+        if #available(iOS 11.0, *) {
+            sizeThatFits.height = UITabBar.tabBarHeight + window.safeAreaInsets.bottom
+        } else {
+            sizeThatFits.height = UITabBar.tabBarHeight
+        }
+        return sizeThatFits
     }
 }
