@@ -20,7 +20,19 @@ class MyTabBarViewController: UITabBarController {
         
         self.tabBar.isTranslucent = false
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        UITabBarExtensions.setTitlePositionAdjustment()
+        
+        // NOTE: This is needed to perform adjustments to the tabBarItem insets
+        self.tabBar.layoutSubviews()
+        
+        UITabBarExtensions.setImageInsetsFor(self.tabBar.items ?? [])
+    }
 }
+
 
 /*
  Original source: https://stackoverflow.com/a/50346008/2994271
@@ -42,6 +54,7 @@ extension UITabBar {
         guard let window = UIApplication.shared.keyWindow else {
             return super.sizeThatFits(size)
         }
+        
         var sizeThatFits = super.sizeThatFits(size)
         if #available(iOS 11.0, *) {
             sizeThatFits.height = UITabBar.tabBarHeight + window.safeAreaInsets.bottom
@@ -49,5 +62,51 @@ extension UITabBar {
             sizeThatFits.height = UITabBar.tabBarHeight
         }
         return sizeThatFits
+    }
+}
+
+public class UITabBarExtensions {
+    fileprivate static let _titleVerticalOffset: CGFloat = -10.0
+    fileprivate static let _imageBottomInset: CGFloat = 5
+    fileprivate static var _imageTopInset: CGFloat {
+        return -_imageBottomInset
+    }
+    
+    /*
+     This method adjusts the Offset for the title of the UITabBarItem.
+     
+     Since UIWindow.safeAreaInsets on newer devices support swiping up from the bottom
+     we have don't need to adjust the Offset since those are already accounted for.
+     
+     For older devices we want to adjust the UITabBarItem titlePosition upwards.
+    */
+    public static func setTitlePositionAdjustment() {
+        guard let window = UIApplication.shared.keyWindow else { return }
+        if window.safeAreaInsets.bottom > 0 { return }
+        
+        UITabBarItem.appearance().titlePositionAdjustment = UIOffset(
+            horizontal: 0,
+            vertical: _titleVerticalOffset)
+    }
+    
+    /*
+     This method adjusts the imageInsets of the UITabBarItem.
+     
+     Since UIWindow.safeAreaInsets on newer devices support swiping up from the bottom
+     we have don't need to adjust the imageInsets since those are already accounted for.
+     
+     For older devices we want to adjust the UITabBarItem imageInsets upwards.
+     */
+    public static func setImageInsetsFor(_ tabBarItems: [UITabBarItem]) {
+        guard let window = UIApplication.shared.keyWindow else { return }
+        if window.safeAreaInsets.bottom > 0 { return }
+        
+        for tabBarItem in tabBarItems {
+            tabBarItem.imageInsets = UIEdgeInsets(
+                top: _imageTopInset,
+                left: 0,
+                bottom: _imageBottomInset,
+                right: 0)
+        }
     }
 }
