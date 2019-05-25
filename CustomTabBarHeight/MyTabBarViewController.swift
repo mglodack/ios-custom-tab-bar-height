@@ -20,4 +20,23 @@ class MyTabBarViewController: UITabBarController {
             ViewController(backgroundColor: .yellow)
         ]
     }
+    
+    /*
+     This tabBarHeight is used to customize the height of the tabBar.
+    */
+    let tabBarHeight: CGFloat = 180.0;
+    
+    /*
+     This allows us to use the custom tabBarHeight and adjust the tabBar height.
+     In doing so, we have to adjust the height and y position to account for the change in height.
+    */
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        var tabFrame = self.tabBar.frame
+        tabFrame.size.height = tabBarHeight
+        tabFrame.origin.y = self.view.frame.size.height - tabBarHeight;
+
+        self.tabBar.frame = tabFrame;
+    }
 }
