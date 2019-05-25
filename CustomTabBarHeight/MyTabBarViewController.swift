@@ -13,11 +13,9 @@ class MyTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // TODO: Add some basic buttons
-        
         viewControllers = [
-            ViewController(backgroundColor: .blue),
-            ViewController(backgroundColor: .yellow)
+            ViewController(backgroundColor: .blue, tabBarTitle: "blue"),
+            ViewController(backgroundColor: .yellow, tabBarTitle: "yellow")
         ]
     }
     

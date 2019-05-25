@@ -11,15 +11,21 @@ import UIKit
 class ViewController: UIViewController {
 
     fileprivate let _backgroundColor: UIColor
+    fileprivate let _tabBarTitle: String
     
-    public init(backgroundColor: UIColor) {
+    public init(backgroundColor: UIColor, tabBarTitle: String) {
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 20)!], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 20)!], for: .selected)
+        
         self._backgroundColor = backgroundColor
+        self._tabBarTitle = tabBarTitle
         
         super.init(nibName: nil, bundle: nil)
         
         self.tabBarItem = UITabBarItem(
-            title: "\(self._backgroundColor)",
-            image: nil,
+            title: _tabBarTitle,
+            image: UIImage(named: "tab_bar_icon")?.withRenderingMode(.alwaysOriginal),
             selectedImage: nil)
     }
     
